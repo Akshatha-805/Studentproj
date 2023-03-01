@@ -1,0 +1,38 @@
+
+<div id="output" class="oput">Welcome</div>
+<label>enter Student Id    </label>
+<input type="text" id="inputdisplay" size="25"/>
+<br><button type="button" id="myBtn">Get Data</button>
+<br>Student Details
+<table>
+<tr><th>Student Id</th><th>Name</th><th>Department</th><th>Marks</th><tr>
+<tbody id="data"></tbody>
+</table>
+
+<script type="text/javascript">
+
+var myContainer="";
+document.getElementById("myBtn").addEventListener("click",getDetails);
+var a=new XMLHttpRequest();
+
+function getDetails()
+{
+var inputText = document.getElementById("inputdisplay").value;
+a.open("POST","/AjaxDemo3/AjaxServlet",true);
+a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+a.onreadystatechange=display;
+
+a.send("name="+inputText+"");
+}
+function display(){
+console.log("ReadyState"+a.readyState+"    Status"+ a.status);
+ if(a.readyState==4 && a.status==200)
+ {
+ 
+document.getElementById("data").innerHTML=a.responseText;
+   
+ }
+}
+</script>
+
+
